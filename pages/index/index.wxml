@@ -1,0 +1,23 @@
+<view class="container">
+  <view class='search'>
+  <image src='../../images/timg.jpg' bindtap="addTodoHandle"></image>
+  <input type='text' placeholder='Anything here...' value='{{ search }}' bindinput="change" bindconfirm='addTodoHandle'></input>
+  </view>
+  <block wx:if="{{ todos.length}}">
+    <view class='todos'>
+    <view class="item{{item.completed ? ' completed': ''}}" wx:for="{{todos}}" wx:key="index" bindtap='toggle' data-index="{{index}}">
+    <icon type="{{ item.completed ? 'success':'cancel'}}"></icon>
+    <text>{{item.name}}</text>
+    <icon type='clear' size='16' catchtap='removeHandle' data-index='{{index}}'></icon>
+    </view>
+  </view>
+  <view class='foot'>
+    <text bindtap='toogleAll'>Toggle all</text>
+    <text wx:if="{{ leftCount}}">{{leftCount}} {{ leftCount > 1 ? 'items':'item'}} left</text>
+    <text bindtap='clearHandle'>Clear completed</text>
+  </view>
+  </block>
+  <view wx:else>
+    <text>there is not work...</text>
+  </view>
+</view>
